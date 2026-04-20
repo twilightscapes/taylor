@@ -1,0 +1,19 @@
+{
+  "github": "twilightscapes",
+  "camera": "Canon",
+  "bio": "Taylor says excuse the mess!",
+  "showDates": true,
+  "mastodon": "",
+  "author": "Taylor",
+  "logo": {
+    "type": "text",
+    "image": "",
+    "text": ""
+  },
+  "enableSocial": true,
+  "instagram": "",
+  "location": "USA",
+  "title": "Taylor's Place",
+  "avatar": "/images/avatar.jpg",
+  "description": "A photography site on the Pirate Social network"
+}
