@@ -1637,11 +1637,17 @@ const sl = labels.social;
     try {
       const res = await fetchTimeout(`${hubUrl}/api/auth/me`, { headers: { Authorization: `Bearer ${token}` } }, 10000);
       if (res.ok) return true;
+      if (res.status !== 401 && res.status !== 403) {
+        // Don't log users out on transient backend errors.
+        return true;
+      }
     } catch (err) {
       console.warn('[PS] Auth check failed:', err?.message || err);
+      // Network/CORS hiccups shouldn't force logout loops.
+      return true;
     }
 
-    // Stale/invalid token: clear auth state so UI doesn't get stuck in a dead half-logged-in mode.
+    // Definite auth failure: clear stale token to avoid dead half-logged-in UI.
     token = null;
     localStorage.removeItem('ps_token');
     localStorage.removeItem('ps_bsky_session');
